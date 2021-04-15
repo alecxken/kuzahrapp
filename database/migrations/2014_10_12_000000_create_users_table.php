@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    /**
+    /**php
      * Run the migrations.
      *
      * @return void

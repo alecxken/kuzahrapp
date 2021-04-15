@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\BasicInformation;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -26,7 +28,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+   // protected $redirectTo = RouteServiceProvider::HOME;
+ 
+    protected $redirectTo = '/userDetails';
+    protected function redirectTo()
+    {
+       $userId = Auth::id();
+        $baasicInfo = BasicInformation::where("user_id",$userId)->first();
+        if(!$baasicInfo){
+            return '/userDetails/'.$userId;
+        
+        }
+        return '/home';
+        
+    }
+
 
     /**
      * Create a new controller instance.

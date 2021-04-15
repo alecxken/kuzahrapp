@@ -8,6 +8,8 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\RoleController;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserDetailsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +22,10 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('login');
 });
+
+
 
 Route::get('/test', function () {
     return view('test');
@@ -80,3 +84,17 @@ Route::post('store-req',[SettingsController::class,'req_store']);
 Route::get('get_req/{id}',[SettingsController::class,'get_req']);
 
 Route::get('delete-req/{id}',[SettingsController::class,'req_delete']);
+
+#Details Routes
+Route::get('/employment', function () {
+  return view('employment');
+});
+
+Route::get('/userDetails/{userId}', [UserDetailsController::class, 'getUserBasicDeitails']);
+
+// Route::get('/createBasicDetails', [UserDetailsController::class, 'createBasicDetails']);
+// Route::post('/', [UserDetailsController::class, 'storeBasicDetails']);
+
+
+// Route::get('/createcontactDetails', [UserDetailsController::class, 'createcontactDetails']);
+// Route::post('/', [UserDetailsController::class, 'storeContactDetails']);

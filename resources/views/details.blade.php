@@ -28,10 +28,10 @@
 		<link rel="stylesheet" href="assets/css/style.css">
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
+		{{-- ///[if lt IE 9]> --}}
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		{{-- <![endif] --}}
 		
 	</head>
 	<body>
@@ -117,7 +117,7 @@
 															</span>
 														</span>
 													</a>
-													<a class="dropdown-item p-2" href="login.html">
+													<a class="dropdown-item p-2" href="/login">
 														<span class="media align-items-center">
 															<span class="lnr lnr-power-switch mr-3"></span>
 															<span class="media-body text-truncate">
@@ -317,7 +317,7 @@
 											<img src="assets/img/profiles/img-6.jpg" alt="User Avatar" class="img-fluid rounded-circle" width="100">
 										</div>
 										<div class="user-details">
-											<h4><b>Welcome Maria</b></h4>
+											<h4><b>{{$user -> name}}</b></h4>
 											<span class="ctm-text-sm">mariacotton@example.com</span>
 										</div>
 									</div>
