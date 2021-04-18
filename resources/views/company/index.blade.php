@@ -75,24 +75,24 @@
                             <div class="card-body align-center">
                                 <h4 class="card-title float-left mb-0 mt-2"> Company Management</h4>
                                 <ul class="nav nav-tabs float-right border-0 tab-list-emp">
-                                 @if(empty($comps))
-												
-										<li class="nav-item">
-                                        <a class="nav-link border-0 font-23 active list-view"
-                                            href="" data-toggle="modal" data-target="#add-information"><i class="fa fa-list-ul"
-                                                aria-hidden="true"></i>Add Company</a>
-                                    </li>		
-												@endif
+                               
+										
                                     
                                     <li class="nav-item pl-3">
+                                    	   @if(empty($comps))<a href="javascript:void(0)"
+ 												data-toggle="modal" data-target="#add-information"
+                                            class="btn btn-theme button-1 text-white ctm-border-radius p-2 add-person ctm-btn-padding"><i
+                                                class="fa fa-plus"></i> Add Company Info</a>@else
                                         <a href="javascript:void(0)"
  												data-toggle="modal" data-target="#addOffice"
                                             class="btn btn-theme button-1 text-white ctm-border-radius p-2 add-person ctm-btn-padding"><i
-                                                class="fa fa-plus"></i> Add Offices</a>
+                                                class="fa fa-plus"></i> Add Offices</a>@endif
                                     </li>
                                 </ul>
                             </div>
                         </div>
+                        @if(!empty($comps))
+
 							<div class="row">
 							
 								<div class="col-xl-7 col-lg-12 col-md-7 d-flex">
@@ -112,7 +112,7 @@
 										<div class="card-body">
 
 											<div class="row">
-											@if(!empty($comps))
+											
 												<div class="col-md-6">
 													<p><span class="text-primary">Register Number : </span>{{$comps->comp_regno}}</p>
 													<p><span class="text-primary">Incorporation Date : </span>{{\Carbon\Carbon::parse($comps->created_at)->format('D m Y')}}</p>
@@ -127,7 +127,7 @@
 													</p>
 													
 												</div>
-												@endif
+												
 											</div>
 											<div class="text-center mt-3">
 												<button class="btn btn-theme text-white ctm-border-radius button-1" data-toggle="modal" data-target="#add-information">Add Company Information</button>
@@ -218,6 +218,7 @@
 								</div>
 						
 							</div>
+						@endif
 						</div>
 					</div>
 				</div>
