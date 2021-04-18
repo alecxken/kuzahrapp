@@ -6,8 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use Redirect,Response;
+
+use Auth;
+
 Use DB;
+
 use Carbon\Carbon;
+
+use App\Models\UserDetail;
+
 class HomeController extends Controller
 {
     /**
@@ -27,7 +34,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+        ##on login
+
+        $check_user = UserDetail::all()->where('user_id',Auth::user()->email)->first();
+
+        if (empty($check_user)) 
+         {
+        return redirect('employee-details')
+                        ->with('danger','Please Update Your Details To Proceed');
+         }
+        else
+        {
+                return 'Alas';
+        }
+
+
             $record = User::select(\DB::raw("COUNT(*) as count"), \DB::raw("DAYNAME(created_at) as day_name"), \DB::raw("DAY(created_at) as day"))
                 ->where('created_at', '>', Carbon::today()->subDay(6))
                 ->groupBy('day_name','day')

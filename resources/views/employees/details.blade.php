@@ -24,14 +24,21 @@
 										</div>
 									</div>
 								</div>
-								<div class="user-card shadow-sm bg-white p-4 text-center ctm-border-radius card">
-									<div class="user-info">
+								<div class="user-card card shadow-sm bg-white text-center ctm-border-radius">
+									<div class="user-info card-body">
 										<div class="user-avatar mb-4">
-											<img src="assets/img/profiles/img-6.jpg" alt="User Avatar" class="img-fluid rounded-circle" width="100">
+										  @if(!empty(Auth::user()->profile_pic))
+                                                    <img src="/img/profiles/{{Auth::user()->profile_pic}}" alt="user avatar"
+                                                        class="img-fluid rounded-circle" width="100">
+                                                @else
+                                                    <img src="{{assets('/img/6.png')}}" alt="user avatar"
+                                                        class="img-fluid rounded-circle" width="100">
+                                                @endif
+										
 										</div>
 										<div class="user-details">
-											<h4><b></b></h4>
-											<span class="ctm-text-sm">mariacotton@example.com</span>
+											<h4><b>Welcome {{Auth::user()->name}}</b></h4>
+											<p>{{\Carbon\Carbon::today()->format('D, d M Y')}}</p>
 										</div>
 									</div>
 								</div>

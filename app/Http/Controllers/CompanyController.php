@@ -14,6 +14,10 @@ use App\Models\Company;
 
 use App\Models\CompanyDocumet;
 
+use App\Models\CompanyOffice;
+
+use App\Models\CompanyTeam;
+
 class CompanyController extends Controller
 {
     //
@@ -48,13 +52,30 @@ class CompanyController extends Controller
         return view('company.index',compact('comps','comp_docs'));
     }
 
+        public function company_office()
+    {
+        $comps = CompanyOffice::all()->first();
+
+        return view('company.department',compact('comps'));
+    }
+
     public function company_page()
     {
         $comps = Company::all()->first();
 
+        if (empty($comps)) 
+        {
+            # code...
+             return view('company.index');
+        }
+
         $comp_docs = CompanyDocumet::all()->where('comp_token',$comps->comp_token);
+
+        $offices = CompanyOffice::all()->count();
+
+        $teams = CompanyTeam::all()->count();
         #This returns the ccompany View
-        return view('company.index',compact('comps','comp_docs'));
+        return view('company.index',compact('comps','comp_docs','offices','teams'));
     }
 
      public function company_view($id)
@@ -164,7 +185,36 @@ class CompanyController extends Controller
 
             $comp->save();
 
+            return back()->with('status','Success');
 
+
+    }
+
+    public function store_company_office(Request $request)
+    {
+        #########Add Company Offices;
+
+           $token = Token::Unique('companies','comp_token',5);
+      
+            $t = date("Y",strtotime("now"));
+      
+             $token = strtoupper('OFC-'.$token.'-'.$t);
+
+          $check = Company::all()->where('comp_token', $request->input('comp_token'))->first();
+
+          $comp = new CompanyOffice();
+
+          $comp->office_token = $token;
+
+          $comp->office_name = $request->input('office_name');
+
+          $comp->desc = $request->input('office_desc');
+
+          $comp->comp_token = $check->comp_token;
+
+          $comp->save();
+
+          return back()->with('status','Success');
     }
 
     public function  company_store_doc(Request $request)
@@ -174,19 +224,7 @@ class CompanyController extends Controller
          $check = Company::all()->where('comp_token', $request->input('comp_token'))->first();
 
                 // if (!empty($check)) 
-                // {
-                //     return false;
-                //     # code...
-                //     $comp = CompanyDocumet::findorfail($check->id);
-
-                // }
-
-                // else
-                // {
-                //     return true;
-                //     # code...
-                  
-                // }
+             
 
               //  return $comp;
               $comp = new CompanyDocumet();

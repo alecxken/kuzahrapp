@@ -22,6 +22,7 @@
 										</div>
 									</div>
 								</div>
+						
 								<div class="card shadow-sm ctm-border-radius">
 									<div class="card-header">
 										<h4 class="card-title mb-0 d-inline-block">Overview </h4>
@@ -30,12 +31,15 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col-md-6 col-6 text-center">
-												<h5 class="btn btn-outline-primary mt-3"><b>6</b></h5>
-												<p class="mb-3">Teams</p>
+												<h5 class="btn btn-outline-primary mt-3"><b>@if(!empty($offices)){{$offices}}@endif
+												</b></h5>
+												<p class="mb-3">Department(s)</p>
 											</div>
 											<div class="col-md-6 col-6 text-center">
-												<h5 class="btn btn-outline-primary mt-3"><b>7</b></h5>
-												<p class="mb-3">People</p>
+												<h5 class="btn btn-outline-primary mt-3"><b>
+												@if(!empty($teams)){{$teams}}@endif
+											    </b></h5>
+												<p class="mb-3">Teams</p>
 											</div>
 										</div>
 										<div class="text-center">
@@ -43,7 +47,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="card ctm-border-radius shadow-sm">
+								<!-- <div class="card ctm-border-radius shadow-sm">
 									<div class="card-header">
 										<div class="d-inline-block">
 											<h4 class="card-title mb-0">Focus Technologies</h4>
@@ -62,18 +66,46 @@
 										<a href="employment.html"><span class="avatar" data-toggle="tooltip" data-placement="top" title="John Gibbs"><img class="img-fluid" alt="avatar image" src="assets/img/profiles/img-2.jpg"></span></a>
 										<a href="employment.html"><span class="avatar" data-toggle="tooltip" data-placement="top" title="Richard Wilson"><img class="img-fluid" alt="avatar image" src="assets/img/profiles/img-10.jpg"></span></a>
 									</div>
-								</div>
+								</div> -->
 							</aside>
 						</div>
 					
 						<div class="col-xl-9 col-lg-8 col-md-12">
+							 <div class="card shadow-sm ctm-border-radius">
+                            <div class="card-body align-center">
+                                <h4 class="card-title float-left mb-0 mt-2"> Company Management</h4>
+                                <ul class="nav nav-tabs float-right border-0 tab-list-emp">
+                                 @if(empty($comps))
+												
+										<li class="nav-item">
+                                        <a class="nav-link border-0 font-23 active list-view"
+                                            href="" data-toggle="modal" data-target="#add-information"><i class="fa fa-list-ul"
+                                                aria-hidden="true"></i>Add Company</a>
+                                    </li>		
+												@endif
+                                    
+                                    <li class="nav-item pl-3">
+                                        <a href="javascript:void(0)"
+ 												data-toggle="modal" data-target="#addOffice"
+                                            class="btn btn-theme button-1 text-white ctm-border-radius p-2 add-person ctm-btn-padding"><i
+                                                class="fa fa-plus"></i> Add Offices</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 							<div class="row">
 							
 								<div class="col-xl-7 col-lg-12 col-md-7 d-flex">
 									<div class="card ctm-border-radius shadow-sm flex-fill">
 										<div class="card-header">
 											<h4 class="card-title mb-0">
-												Focus Technologies
+												@if(!empty($comps))
+													{{$comps->comp_name}}
+												@else
+												
+												@endif
+												 
+										
 												<a href="javascript:void(0)" class="float-right text-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 											</h4>
 										</div>
@@ -201,18 +233,25 @@
 		<div class="modal fade" id="addOffice">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
-				
+					@if(!empty($comps))
+		 {!! Form::open(['method'=> 'post','route' => 'store.company_office', 'files' => true ]) !!}
+ 					<input type="hidden" value="{{$comps->comp_token}}" name="comp_token">
 					<!-- Modal body -->
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Create a New Office</h4>
 						<p>Offices allow you to group people by location. Offices can subscribe to different public holidays, helping you to localize people's time off allowances.</p>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Name">
+							<input type="text" name="office_name" class="form-control" placeholder="Name">
+						</div>
+						<div class="form-group">
+							<input type="text" name="office_desc" class="form-control" placeholder="Description">
 						</div>
 						<button type="button" class="btn btn-danger ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme ctm-border-radius text-white float-right button-1">Add</button>
+						<button type="submit" class="btn btn-theme ctm-border-radius text-white float-right button-1">Add</button>
 					</div>
+			{!!Form::close()!!}
+			@endif
 				</div>
 			</div>
 		</div>
@@ -251,6 +290,7 @@
 		</div>
 		
 		<!-- New Team The Modal -->
+			
 		<div class="modal fade" id="add-information" role="document">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
@@ -309,6 +349,7 @@
 				</div>
 			</div>
 		</div>
+			
 		
 		<!-- New Folder The Modal -->
 		<div class="modal fade" id="NewFolder">
@@ -329,7 +370,8 @@
 			</div>
 		</div>
 		
-		<!-- add document The Modal -->
+		<!-- add document The Modal -->	
+		@if(!empty($comps))
 		<div class="modal fade" id="addDocument">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
@@ -350,6 +392,7 @@
 				</div>
 			</div>
 		</div>
+		@endif
 		
 		<!-- add office The Modal -->
 		<div class="modal fade" id="addOffice1">

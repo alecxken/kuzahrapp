@@ -14,9 +14,9 @@
                                                     class="fa fa-link pr-0 pr-lg-2"></span><span
                                                     class="d-none d-lg-inline">Company</span></a></li>
 
-                                          <li class="mr-1 {{ (request()->is('viewsiteurl')) ? 'active' : '' }}"><a href="{{url('/viewsiteurl')}}" class="text-dark btn-ctm-space "><span
+                                          <li class="mr-1 {{ (request()->is('manage-roles')) ? 'active' : '' }}"><a href="{{url('/manage-roles')}}" class="text-dark btn-ctm-space "><span
                                                     class="lnr lnr-home pr-0 pr-lg-2"></span><span
-                                                    class="d-none d-lg-inline">Login Links</span></a></li>
+                                                    class="d-none d-lg-inline">Manage</span></a></li>
 
                                         <li class="mr-1 {{ (request()->is('ess-department')) ? 'active' : '' }}  {{ (request()->is('ess-staff')) ? 'active' : '' }} {{ (request()->is('siteurl')) ? 'active' : '' }}" ><a href="{{url('ess-staff')}}" class="text-dark btn-ctm-space "><span
                                                     class="lnr lnr-cog pr-0 pr-lg-2"></span><span

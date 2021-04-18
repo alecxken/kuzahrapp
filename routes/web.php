@@ -58,6 +58,7 @@ Route::get('/company_page', [CompanyController::class, 'company_page'])->name('c
 Route::get('/read-file/{id}', [CompanyController::class, 'readpdf'])->name('pdf.read');
 
 Route::post('/store_company', [CompanyController::class, 'company_store'])->name('store.company_page');
+Route::post('/store_company_office', [CompanyController::class, 'store_company_office'])->name('store.company_office');
 
 Route::post('/store_company_doc', [CompanyController::class, 'company_store_doc'])->name('store.company_page_doc');
 

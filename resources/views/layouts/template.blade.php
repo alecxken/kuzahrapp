@@ -33,6 +33,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
@@ -64,9 +66,7 @@
 
         <!-- Content -->
         <div class="page-wrapper">
-        
-
-            <div class="container-fluid">
+                <div class="container-fluid">
              @if (session('status'))
         <div id="erros" class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -82,6 +82,8 @@
         <p> {{ session('error') }}</p>
       </div>
 @elseif(session('danger'))
+
+
 <div id="erros" class="alert alert-danger alert-dismissible">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
               <h4>Warning!</h4>
@@ -106,6 +108,8 @@
             @endforeach
             </div>
 @endif
+
+            
                 @yield('content')
             </div>
         </div>
@@ -145,12 +149,17 @@
     <!-- Custom Js -->
     <script src="assets/js/script.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
 
 setTimeout(function() {
     $('#erros').fadeOut('fast');
 }, 9000);
 </script>
+
+
+
           @yield('extrajs')
     
 
