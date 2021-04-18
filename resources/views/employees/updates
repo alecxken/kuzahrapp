@@ -1,0 +1,55 @@
+//USEUNIT CommonTasks
+function ecobay()
+{
+   Options.Run.Timeout = 1500;
+  //Simulates a click on the View control at the specified position using control-relative coordinates. If no coordinates are specified, a click is simulated in the center of the control.
+  Aliases.TextView_EcobankPay.click();
+  Delay('30');
+  Aliases.Button_Type_manually.click();
+  Delay('30');
+  Aliases.choose_account.touch();
+   
+  selectAccount("1441002058434");
+   Aliases.transfer_EditText_edt_money_value.SetText("10.00");
+   
+   Aliases.EditText_edt_terminal_id.touch();
+   Aliases.EditText_edt_terminal_id.SetText("71457556");
+   Aliases.EditText_edt_merchant_name.touch();
+  waitForLoader();
+   Aliases.Airtime_Button_Continue.Click();
+    
+   Aliases.Button_Confirm_and_pay.Click();
+  
+    
+    
+     //ENTER PASSWORD
+   EnterPin("080808");
+    waitForLoader();
+   Aliases.TextView_GENERAL.touch();
+   Aliases.Button_Save.Click();
+}
+
+
+//USEUNIT CommonTasks
+//USEUNIT Ecobankpay
+function Transfer_from_active_account_to_active_account()
+{
+   //loadVariables();
+ 
+ loadEcopayVariables();
+ Ecobankpayactive(Project.Variables.ecopay_transfer_amount,Project.Variables.ecopay_ACTIVE_account,Project.Variables.TERMINALID,
+ Project.Variables.PIN);
+}
+
+function loadEcopayVariables()
+{
+  // Get the sheet of the Excel file
+   var excelFile = Excel.Open("\\\\10.8.247.79\\MobileApp_4_2_1_EGH\\data_mobileapp.xlsx");
+  var excelSheet = excelFile.SheetByTitle("ecobank_pay");
+  
+   createVariable("PIN",excelSheet.Cell("B", 16).Value);
+   createVariable("TERMINALID",excelSheet.Cell("C", 16).Value);
+   createVariable("ecopay_ACTIVE_account",excelSheet.Cell("B",2).Value)
+   createVariable("ecopay_transfer_amount",excelSheet.Cell("F",2).Value);
+  
+}

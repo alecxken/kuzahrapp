@@ -26,19 +26,28 @@
 								<div class="user-card card shadow-sm bg-white text-center ctm-border-radius">
 									<div class="user-info card-body">
 										<div class="user-avatar mb-4">
-											<img src="assets/img/profiles/img-13.jpg" alt="User Avatar" class="img-fluid rounded-circle" width="100">
+										  @if(!empty(Auth::user()->profile_pic))
+                                                    <img src="/img/profiles/{{Auth::user()->profile_pic}}" alt="user avatar"
+                                                        class="img-fluid rounded-circle" width="100">
+                                                @else
+                                                    <img src="{{assets('/img/6.png')}}" alt="user avatar"
+                                                        class="img-fluid rounded-circle" width="100">
+                                                @endif
+										
 										</div>
 										<div class="user-details">
-											<h4><b>Welcome Admin</b></h4>
-											<p>Sun, 29 Nov 2019</p>
+											<h4><b>Welcome {{Auth::user()->name}}</b></h4>
+											<p>{{\Carbon\Carbon::today()->format('D, d M Y')}}</p>
 										</div>
 									</div>
 								</div>
 								<div class="quicklink-sidebar-menu ctm-border-radius shadow-sm bg-white card">
 									<div class="card-body">
 										<ul class="list-group">
-											<li class="list-group-item text-center active button-5"><a href="index.html" class="text-white">Admin Dashboard</a></li>
-											<li class="list-group-item text-center button-6"><a class="text-dark" href="employees-dashboard.html">Employees Dashboard</a></li>
+											@role('Admin')
+											<li class="list-group-item text-center active button-5"><a href="" class="text-white">Admin Dashboard</a></li>
+											@endrole
+											<li class="list-group-item text-center button-6"><a class="text-dark" href="">Employees Dashboard</a></li>
 										</ul>
 									</div>
 								</div>
