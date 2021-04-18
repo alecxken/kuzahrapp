@@ -6,13 +6,13 @@
                                 <div class="append mr-auto my-0 my-md-0 mr-auto">
                                     <ul class="list-group list-group-horizontal-md mr-auto">
 
-                                        <li class="mr-1 {{ (request()->is('home')) ? 'active' : '' }} {{ (request()->is('')) ? 'active' : '' }}"><a href="{{url('/ess-home')}}" class="text-dark btn-ctm-space "><span
+                                        <li class="mr-1 {{ (request()->is('home')) ? 'active' : '' }} {{ (request()->is('')) ? 'active' : '' }}"><a href="{{url('/home')}}" class="text-dark btn-ctm-space "><span
                                                     class="lnr lnr-home pr-0 pr-lg-2"></span><span
                                                     class="d-none d-lg-inline">Home</span></a></li>
 
-                                        <li class="mr-1 {{ (request()->is('viewstafflist')) ? 'active' : '' }}"><a href="{{url('/viewstafflist')}}" class="text-dark btn-ctm-space "><span
+                                        <li class="mr-1 {{ (request()->is('company_page')) ? 'active' : '' }}"><a href="{{url('/company_page')}}" class="text-dark btn-ctm-space "><span
                                                     class="fa fa-link pr-0 pr-lg-2"></span><span
-                                                    class="d-none d-lg-inline">Staff Directory</span></a></li>
+                                                    class="d-none d-lg-inline">Company</span></a></li>
 
                                           <li class="mr-1 {{ (request()->is('viewsiteurl')) ? 'active' : '' }}"><a href="{{url('/viewsiteurl')}}" class="text-dark btn-ctm-space "><span
                                                     class="lnr lnr-home pr-0 pr-lg-2"></span><span

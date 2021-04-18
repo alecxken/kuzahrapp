@@ -6,18 +6,55 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+use Token;
+
 use App\Models\User;
 
 use App\Models\Company;
+
+use App\Models\CompanyDocumet;
 
 class CompanyController extends Controller
 {
     //
 
+    public function readpdf($id)
+    {
+       $filename = $id; 
+
+        $path = public_path('files/'.$filename);
+
+       if (!file_exists($path))
+        {
+
+          return back()->with('danger','No data ');
+
+        }
+
+
+        $filetype = \File::extension($filename);
+
+        if($filetype == 'pdf') 
+        {
+
+                    return \Response::make(file_get_contents($path), 200, [
+                    'Content-Type' => ['image/jpg', 'application/pdf'],
+                    'Content-Disposition' => 'inline; filename="'.$filename.'"'
+                ]);
+
+        }
+
+        #This returns the ccompany View
+        return view('company.index',compact('comps','comp_docs'));
+    }
+
     public function company_page()
     {
+        $comps = Company::all()->first();
+
+        $comp_docs = CompanyDocumet::all()->where('comp_token',$comps->comp_token);
         #This returns the ccompany View
-        return view('company.index');
+        return view('company.index',compact('comps','comp_docs'));
     }
 
      public function company_view($id)
@@ -27,7 +64,7 @@ class CompanyController extends Controller
         return view('company.index');
     }
 
-      public function store_docs(Request $request)
+      public function store_company(Request $request)
     {
         $data = new DepartmentDoc();
 
@@ -58,9 +95,9 @@ class CompanyController extends Controller
         return back()->with('status','success');
     }
 
-    public function company_store()
+    public function company_store(Request $request)
     {
-             $token = Token::Unique('companies','token',5);
+             $token = Token::Unique('companies','comp_token',5);
       
             $t = date("Y",strtotime("now"));
       
@@ -83,6 +120,7 @@ class CompanyController extends Controller
                     $comp->comp_token = $token;
                 }
 
+           $comp->comp_desc = 'aLAS';
 
             $comp->comp_name = $request->input('comp_name');
 
@@ -104,15 +142,15 @@ class CompanyController extends Controller
             if($request->hasfile('image'))
                 {  
                         $destinationPath = public_path('img/');
-                        
+
                         $filename1 = time().'-'.$media->getClientOriginalName();
-                        
+
                         $media->move($destinationPath, $filename1);
-                        
+
                         $files1 = $filename1;
-                        
+
                         $comp->comp_logo = $files1;
-                        
+
                     
                 }
 
@@ -127,6 +165,63 @@ class CompanyController extends Controller
             $comp->save();
 
 
+    }
+
+    public function  company_store_doc(Request $request)
+    {
+
+            //return $request;
+         $check = Company::all()->where('comp_token', $request->input('comp_token'))->first();
+
+                // if (!empty($check)) 
+                // {
+                //     return false;
+                //     # code...
+                //     $comp = CompanyDocumet::findorfail($check->id);
+
+                // }
+
+                // else
+                // {
+                //     return true;
+                //     # code...
+                  
+                // }
+
+              //  return $comp;
+              $comp = new CompanyDocumet();
+
+                    $comp->comp_token = $check->comp_token;
+    
+            $media = $request->file('file');
+
+            if($request->hasfile('file'))
+                {  
+                        $destinationPath = public_path('files/');
+
+                        $filename1 = time().'-'.$media->getClientOriginalName();
+
+                        $media->move($destinationPath, $filename1);
+
+                        $comp->comp_token = $check->comp_token;
+
+                        $comp->doc_name = $media->getClientOriginalName();
+
+                        $fileSize = \File::size(public_path('files/'.$filename1));
+            
+                        $comp->doc_size = $fileSize; 
+
+                        $files1 = $filename1;
+
+                        $comp->doc = $files1;
+
+                        $comp->save();
+
+                    
+                }
+
+                return back()->with('status','Successs');
+   
     }
 
 }

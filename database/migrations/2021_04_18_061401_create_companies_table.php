@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('comp_token');
             $table->text('comp_name');
-            $table->text('comp_desc');
+            $table->text('comp_desc')->nullable();
             $table->text('comp_address');
             $table->string('comp_regno')->nullable();
             $table->string('comp_phoneno')->nullable();

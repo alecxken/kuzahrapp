@@ -68,7 +68,7 @@
 					
 						<div class="col-xl-9 col-lg-8 col-md-12">
 							<div class="row">
-							@if(!empty($company))
+							
 								<div class="col-xl-7 col-lg-12 col-md-7 d-flex">
 									<div class="card ctm-border-radius shadow-sm flex-fill">
 										<div class="card-header">
@@ -80,9 +80,10 @@
 										<div class="card-body">
 
 											<div class="row">
+											@if(!empty($comps))
 												<div class="col-md-6">
 													<p><span class="text-primary">Register Number : </span>{{$comps->comp_regno}}</p>
-													<p><span class="text-primary">Incorporation Date : </span>{{\Carbon\Carbon::parse($comps->comp_regno)->format('D m Y')}}</p>
+													<p><span class="text-primary">Incorporation Date : </span>{{\Carbon\Carbon::parse($comps->created_at)->format('D m Y')}}</p>
 													<p><span class="text-primary">Company : </span>{{$comps->comp_name}}</p>
 												</div>
 												<div class="col-md-6">
@@ -94,6 +95,7 @@
 													</p>
 													
 												</div>
+												@endif
 											</div>
 											<div class="text-center mt-3">
 												<button class="btn btn-theme text-white ctm-border-radius button-1" data-toggle="modal" data-target="#add-information">Add Company Information</button>
@@ -101,6 +103,7 @@
 										</div>
 									</div>
 								</div>
+								@if(!empty($comps))
 								<div class="col-xl-5 col-lg-12 col-md-5 d-flex">
 									<div class="card ctm-border-radius shadow-sm flex-fill">
 										<div class="card-header">
@@ -130,6 +133,7 @@
 										</div>
 									</div>
 								</div>
+								@endif
 								<div class="col-md-12">
 									<div class="company-doc">
 										<div class="card ctm-border-radius shadow-sm">
@@ -158,9 +162,9 @@
 															@foreach ($comp_docs as $comp )		
 																<tr>
 																	<td class="text-primary"><i class="fa fa-file-pdf-o" data-toggle="tooltip" data-placement="top" title="PDF" aria-hidden="true"></i></td>
-																	<td><a href="javascript:void(0)" class="text-primary">{{$comp->doc_name}}</a></td>
-																	<td>>{{\Carbon\Carbon::parse($comp->doc_date)->format('D m Y')}} /td>
-																	<td>20 MB</td>
+																	<td><a href="{{url('read-file/'.$comp->doc)}}" target="_blank" class="text-primary">{{$comp->doc_name}}</a></td>
+																	<td>{{\Carbon\Carbon::parse($comp->doc_date)->format('D m Y')}} </td>
+																	<td>{{number_format($comp->doc_size/1000000,2)}} MB</td>
 																	<td class="text-right">
 																		<div class="table-action">
 																			<a href="javascript:void(0);" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete">
@@ -180,7 +184,7 @@
 										</div>
 									</div>
 								</div>
-							@endif
+						
 							</div>
 						</div>
 					</div>
@@ -299,7 +303,7 @@
 						</div>
 						
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme ctm-border-radius text-white float-right button-1">Add</button>
+						<button type="submit" class="btn btn-theme ctm-border-radius text-white float-right button-1">Add</button>
 					</div>
 					{!!Form::close()!!}
 				</div>
@@ -331,15 +335,18 @@
 				<div class="modal-content">
 				
 					<!-- Modal body -->
+					   {!! Form::open(['method'=> 'post','url' => 'store_company_doc', 'files' => true ]) !!}
+							<input type="hidden" name="comp_token" value="{{$comps->comp_token}}">
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Upload Document</h4>
 						<div class="form-group">
-							<input type="file" class="form-control">
+							<input type="file"  name="file" class="form-control">
 						</div>
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme ctm-border-radius text-white float-right button-1">Upload</button>
+						<button type="submit" class="btn btn-theme ctm-border-radius text-white float-right button-1">Upload</button>
 					</div>
+						{!!Form::close()!!}
 				</div>
 			</div>
 		</div>

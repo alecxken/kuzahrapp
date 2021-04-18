@@ -55,7 +55,13 @@ Route::get('/myapps', function () {
 
 Route::get('/company_page', [CompanyController::class, 'company_page'])->name('create.company_page');
 
-Route::post('/store_company', [CompanyController::class, 'store_company'])->name('store.company_page');
+Route::get('/read-file/{id}', [CompanyController::class, 'readpdf'])->name('pdf.read');
+
+Route::post('/store_company', [CompanyController::class, 'company_store'])->name('store.company_page');
+
+Route::post('/store_company_doc', [CompanyController::class, 'company_store_doc'])->name('store.company_page_doc');
+
+
 
 Route::get('/user_create', [UserController::class, 'usercreate'])->name('create.user');
 
