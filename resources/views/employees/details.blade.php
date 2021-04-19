@@ -64,6 +64,7 @@
 										<div class="card-header">
 											<h4 class="card-title mb-0">Basic Information</h4>
 										</div>
+
 										<div class="card-body text-center">
 											<p class="card-text mb-3"><span class="text-primary">Preferred Name :</span><b>	 Maria</b></p>
 											<p class="card-text mb-3"><span class="text-primary">First Name :</span> Maria</p>
@@ -75,6 +76,7 @@
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_basicInformation"><i class="fa fa-plus" aria-hidden="true"></i></a>
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#edit_basicInformation"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 										</div>
+										{!!Form::close()!!}
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-6 col-md-6 d-flex">
@@ -175,33 +177,36 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- Modal body -->
+					{!! Form::open(['method'=> 'post','route' => 'store.basic_Information', 'files' => true ]) !!}
+
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Basic Information</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Preferred Name">
+							<input type="text" class="form-control" name="Preferred_name" placeholder="Add Preferred Name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="First Name">
+							<input type="text" class="form-control" name="First_name" placeholder="First Name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Last Name">
+							<input type="text" class="form-control" name="Last_name" placeholder="Last Name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Nationality">
+							<input type="text" class="form-control" name="Nationality" placeholder="Add Nationality">
 						</div>
 						<div class="input-group mb-3">
-							<input class="form-control datetimepicker date-enter" type="text" placeholder="Add Date of Birth">
+							<input class="form-control datetimepicker date-enter" name="Date_birth" type="text" placeholder="Add Date of Birth">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Gender">
+							<input type="text" class="form-control" name="Gender" placeholder="Add Gender">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Blood Group">
+							<input type="text" class="form-control" name="Blood_group" placeholder="Add Blood Group">
 						</div>
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Add</button>
+						<button type="submit" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Add</button>
 					</div>
+					{!!Form::close()!!}
 				</div>
 			</div>
 		</div>
@@ -267,7 +272,7 @@
 							<input type="text" class="form-control" placeholder="Connect Your Linkedin" value="#mariacotton">
 						</div>
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
+						<button type="submit" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
 					</div>
 				</div>
 			</div>
@@ -277,30 +282,36 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- Modal body -->
+
+					{!! Form::open(['method'=> 'post','route' => 'store.contact_Details', 'files' => true ]) !!}
+					{{-- <form action="/store.contact_Details" method="post" enctype="multipart/form-data"> --}}
+						{{-- @csrf --}}
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Add Contact</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Phone Number">
+							<input type="text" class="form-control" name="Phone_number" placeholder="Add Phone Number">
 						</div>
 						<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="Login Email">
+							<input type="email" class="form-control" name="Login_email" placeholder="Login Email">
 						</div>
 						<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="Add Personal Email">
+							<input type="email" class="form-control" name="Personal_email" placeholder="Add Personal Email">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Seconary Phone Number">
+							<input type="text" class="form-control" name="Secondary_Phone_number" placeholder="Add Seconary Phone Number">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Web Site">
+							<input type="text" class="form-control" name="Web_site" placeholder="Add Web Site">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Connect Your Linkedin">
+							<input type="text" class="form-control" name="Linkedin" placeholder="Connect Your Linkedin">
 						</div>
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
+						<button type="submit" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
 					</div>
+				{{-- </form> --}}
+					{!!Form::close()!!}
 				</div>
 			</div>
 		</div>

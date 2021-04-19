@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\EmployeeController;
 
+use App\Http\Controllers\EmployeesDetailsController;
 
 use App\Http\Controllers\CompanyController;
 /*
@@ -125,3 +126,9 @@ Route::get('delete-req/{id}',[SettingsController::class,'req_delete']);
 
 ####Employee Details Route
 Route::get('employee-details',[EmployeeController::class,'get_details']);
+
+//Basic deatails route
+// Route::get('/userDetails/{userId}', [EmployeesDetailsController::class, 'getUserBasicDeitails']);
+
+Route::post('/Store_basicInformation', [EmployeesDetailsController::class, 'BasicDetails_store'])->name('store.basic_Information');
+Route::post('/Store_contactDetails', [EmployeesDetailsController::class, 'ContactDetails_store'])->name('store.contact_Details');

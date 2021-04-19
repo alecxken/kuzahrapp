@@ -81,7 +81,7 @@ class CompanyController extends Controller
      public function company_view($id)
     {
         $data = Company::all();
-        #This returns the ccompany View
+        #This returns the company View
         return view('company.index');
     }
 
