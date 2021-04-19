@@ -158,8 +158,40 @@ setTimeout(function() {
 }, 9000);
 </script>
 
+ 
 
-
+<script type="text/javascript">
+    toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+@if(session("danger"))
+  toastr.error("{{ session("danger") }}");
+@elseif("status")
+    toastr.success("{{ session("status") }}");
+@elseif("success")
+    toastr.success("{{ session("success") }}");
+@elseif("info")
+ toastr.info("{{ session("info") }}");
+@elseif("error")
+toastr.error("{{ session("error") }}");
+@elseif("warning")
+ toastr.warning("{{ session("warning") }}");
+@endif
+</script>
           @yield('extrajs')
     
 
