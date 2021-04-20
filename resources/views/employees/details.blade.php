@@ -66,17 +66,19 @@
 										</div>
 
 										<div class="card-body text-center">
-											<p class="card-text mb-3"><span class="text-primary">Preferred Name :</span><b>	 Maria</b></p>
-											<p class="card-text mb-3"><span class="text-primary">First Name :</span> Maria</p>
-											<p class="card-text mb-3"><span class="text-primary">Last Name : </span>Cotton</p>
-											<p class="card-text mb-3"><span class="text-primary">Nationality :</span> American</p>
+											@if (!empty($BasicDetails))
+											<p class="card-text mb-3"><span class="text-primary">Preferred Name :</span><b>	{{ $BasicDetails->Preferred_name}}</b></p>
+											<p class="card-text mb-3"><span class="text-primary">First Name :</span>{{ $BasicDetails->First_name}} </p>
+											<p class="card-text mb-3"><span class="text-primary">Last Name : </span>{{ $BasicDetails->Last_name}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Nationality :</span>  {{$BasicDetails->Nationality}}</p>
 											<p class="card-text mb-3"><span class="text-primary">Date of Birth :</span> 05 May 1990</p>
-											<p class="card-text mb-3"><span class="text-primary">Gender : </span>Female</p>
-											<p class="card-text mb-3"><span class="text-primary">Blood Group :</span> A+</p>
+											<p class="card-text mb-3"><span class="text-primary">Gender : </span> {{$BasicDetails->Gender}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Blood Group :</span> {{$BasicDetails->Blood_group}}</p>
+											@endif
+											
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_basicInformation"><i class="fa fa-plus" aria-hidden="true"></i></a>
-											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#edit_basicInformation"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											<button value="{{ $BasicDetails->id}}" class="btn btn-theme ctm-border-radius text-white btn-sm open-complete " > <i class="fa fa-pencil" aria-hidden="true"></i></button>
 										</div>
-										{!!Form::close()!!}
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-6 col-md-6 d-flex">
@@ -84,15 +86,20 @@
 										<div class="card-header">
 											<h4 class="card-title mb-0">Contact</h4>
 										</div>
+
 										<div class="card-body text-center">
-											<p class="card-text mb-3"><span class="text-primary">Phone Number : </span>987654321</p>
-											<p class="card-text mb-3"><span class="text-primary">Personal Email : </span>mariacotton@example.com</p>
-											<p class="card-text mb-3"><span class="text-primary">Secondary Number : </span>986754231</p>
-											<p class="card-text mb-3"><span class="text-primary">Web Site : </span>www.focustechnology.com</p>
-											<p class="card-text mb-3"><span class="text-primary">Linkedin : </span>#mariacotton</p>
+											@if (!empty($ContactDetails))
+											<p class="card-text mb-3"><span class="text-primary">Phone Number : </span>	 {{$ContactDetails->Phone_number}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Personal Email : </span>{{$ContactDetails->Login_email}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Secondary Number : </span>{{$ContactDetails->Personal_email}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Web Site : </span>{{$ContactDetails->Web_site}}</p>
+											<p class="card-text mb-3"><span class="text-primary">Linkedin : </span>{{$ContactDetails->Linkedin}}</p>
+											@endif
+										
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_Contact"><i class="fa fa-plus" aria-hidden="true"></i></a>
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#edit_Contact"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 										</div>
+
 									</div>
 								</div>
 								<div class="col-xl-4 col-lg-12 col-md-12">
@@ -219,7 +226,7 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Edit Basic Information</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Preferred Name" value="Maria">
+							<input type="text" class="form-control" id="Preferred_name" placeholder="Add Preferred Name" value="Maria">
 						</div>
 						<div class="input-group mb-3">
 							<input type="text" class="form-control" placeholder="First Name" value="Maria">
@@ -364,6 +371,30 @@
 			</div>
 		</div>
 				
+		@section('extrajs')
 		
-
+		 <script>
+		
+		
+		   $(document).ready(function(){
+		
+			var url = "get-basicdetails";
+		
+			$('.open-complete').click(function(){
+				var task_id = $(this).val();
+		
+				var base_url = window.location.origin;
+		
+				$.get(base_url + '/' + url + '/' + task_id, function (data) {
+					//success data
+					console.log(data);
+					$('#basic_id').text(data.id);
+					$('#Preferred_name').val(data.Preferred_name);
+				  
+					$('#ViewModal').modal('show');
+				}) 
+			});
+		  });
+		  </script>
+		@endsection
 		@endsection

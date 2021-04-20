@@ -17,10 +17,10 @@ class CreateContactInformationTable extends Migration
             $table->id();
            
             $table->unsignedBigInteger('user_id');
-            $table ->integer('Phone_number');
+            $table ->bigInteger('Phone_number');
             $table ->string('Login_email');
             $table ->string('Personal_email');
-            $table ->string('Secondary_Phone_number');
+            $table ->bigInteger('Secondary_Phone_number');
             $table ->string('Web_site');
             $table ->string('Linkedin');
             $table->timestamps();

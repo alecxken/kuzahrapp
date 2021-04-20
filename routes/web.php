@@ -125,10 +125,13 @@ Route::get('get_req/{id}',[SettingsController::class,'get_req']);
 Route::get('delete-req/{id}',[SettingsController::class,'req_delete']);
 
 ####Employee Details Route
-Route::get('employee-details',[EmployeeController::class,'get_details']);
+Route::get('details',[EmployeeController::class,'get_details']);
 
 //Basic deatails route
 // Route::get('/userDetails/{userId}', [EmployeesDetailsController::class, 'getUserBasicDeitails']);
 
 Route::post('/Store_basicInformation', [EmployeesDetailsController::class, 'BasicDetails_store'])->name('store.basic_Information');
 Route::post('/Store_contactDetails', [EmployeesDetailsController::class, 'ContactDetails_store'])->name('store.contact_Details');
+
+Route::get('employee-details', [EmployeesDetailsController::class,'getDetails']);
+Route::get('get-basicdetails/{id}', [EmployeesDetailsController::class,'editBasic_details']);

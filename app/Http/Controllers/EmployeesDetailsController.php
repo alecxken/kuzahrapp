@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Models\basicInformation;
 use App\Models\ContactInformation;
 use App\Models\User;
 
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+use Illuminate\Support\Facades\Auth;
+
+
+
+use Illuminate\Support\Facades\DB;
 class EmployeesDetailsController extends Controller
 {
     //
@@ -54,7 +58,7 @@ class EmployeesDetailsController extends Controller
             'Web_site'=>'required',
             'Linkedin'=>'required',
                     ]);
-                    $ContactDetails = new basicInformation();
+                    $ContactDetails = new ContactInformation();
                     $ContactDetails->user_id = Auth::user()->id;
 
                     $ContactDetails->Phone_number = $request->input('Phone_number');
@@ -70,12 +74,24 @@ class EmployeesDetailsController extends Controller
                     
                    
     }
-    // public function getUserBasicDeitails($userId){
-    
-    //     $userDetails = BasicInformation::where("user_id",$userId)->get();
-    //     $userContactDetails = ContactInformation::where("user_id",$userId)->get();
-    //     $user = User::where("id",$userId)->first();
-    //    // dd($user);
-    //     return view('/employees/details', compact('userDetails','userContactDetails','user'));
-    // }
+   // basic information and contact information display
+    public function getDetails()
+    {
+        $userId =Auth::id();
+        // $ContactInformations = ContactInformation::all();
+        $BasicDetails = basicInformation::all()->where("user_id",$userId)->first();
+      
+// dd($BasicDetails);
+        $ContactDetails = ContactInformation::all()->where("user_id",$userId)->first();
+        // return $ContactDetails;
+                return view('employees.details',compact('ContactDetails' ,'BasicDetails'));
+// return view('employees/details')->with('ContactDetails',$ContactDetails);
+        // return view('employees/details' ,compact('ContactDetails'));
+
+    }
+    public function editBasic_details($id){
+        $data = basicInformation::findorfail($id);
+return $data;
+    }
+   
 }
