@@ -1,6 +1,8 @@
 @extends('layouts.template')
 
 @section('content')
+<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
 			<!-- Content -->
 			<div class="page-wrapper">
 				<div class="container-fluid">
@@ -77,7 +79,9 @@
 											@endif
 											
 											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_basicInformation"><i class="fa fa-plus" aria-hidden="true"></i></a>
+											@if (!empty($BasicDetails))
 											<button value="{{ $BasicDetails->id}}" class="btn btn-theme ctm-border-radius text-white btn-sm open-complete " > <i class="fa fa-pencil" aria-hidden="true"></i></button>
+										@endif
 										</div>
 									</div>
 								</div>
