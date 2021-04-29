@@ -1,8 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
+
 			<!-- Content -->
 			<div class="page-wrapper">
 				<div class="container-fluid">
@@ -230,25 +229,25 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Edit Basic Information</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" id="Preferred_name" placeholder="Add Preferred Name" value="Maria">
+							<input type="text" class="form-control" id="Preferred_name" placeholder="Add Preferred Name" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="First Name" value="Maria">
+							<input type="text" class="form-control" placeholder="First Name"  id="First_name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Last Name" value="Cotton">
+							<input type="text" class="form-control" placeholder="Last Name" id="Last_name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Nationality" value="American">
+							<input type="text" class="form-control" placeholder="Add Nationality" id="Nationality">
 						</div>
 						<div class="input-group mb-3">
-							<input class="form-control datetimepicker date-enter" type="text" placeholder="Add Date of Birth" value="05-07-1990">
+							<input class="form-control datetimepicker date-enter" type="text" placeholder="Add Date of Birth" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Gender" value="Female">
+							<input type="text" class="form-control" placeholder="Add Gender" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Blood Group" value="A+">
+							<input type="text" class="form-control" placeholder="Add Blood Group" >
 						</div>
 						<button type="button" class="btn btn-danger float-right ml-3" data-dismiss="modal">Cancel</button>
 						<button type="button" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
@@ -375,9 +374,9 @@
 			</div>
 		</div>
 				
-		@section('extrajs')
-		
-		 <script>
+		@section('extrajjs')
+
+		 <script type="text/javascript">
 		
 		
 		   $(document).ready(function(){
@@ -394,8 +393,11 @@
 					console.log(data);
 					$('#basic_id').text(data.id);
 					$('#Preferred_name').val(data.Preferred_name);
-				  
-					$('#ViewModal').modal('show');
+					$('#First_name').val(data.First_name);
+					$('#Last_name').val(data.Last_name);
+					//window.$('#edit_basicInformation').modal();
+				     $("#edit_basicInformation").modal("show");
+				
 				}) 
 			});
 		  });

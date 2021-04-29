@@ -130,7 +130,7 @@
 												
 											</div>
 											<div class="text-center mt-3">
-												<button class="btn btn-theme text-white ctm-border-radius button-1" data-toggle="modal" data-target="#add-information">Add Company Information</button>
+												<button class="btn btn-theme text-white ctm-border-radius button-1" data-toggle="modal" data-target="#add-information">Add Department Info </button>
 											</div>
 										</div>
 									</div>
@@ -304,7 +304,7 @@
 
 						<div class="form-group">
 							<div class="input-group mb-3">
-								<input class="form-control" name="comp_name" type="text" placeholder="Company Name">
+								<input class="form-control" name="comp_name" type="text" readonly=""  placeholder="Company Name"}>
 							</div>
 						</div>
 						<div class="form-group">

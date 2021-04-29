@@ -122,11 +122,13 @@
 
     <!-- jQuery -->
     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
+<!--  -->
 
     <!-- Bootstrap Core JS -->
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+
+      @yield('extrajjs')
 
     <!-- Sticky sidebar JS -->
     <script src="{{asset('assets/plugins/theia-sticky-sidebar/ResizeSensor.js')}}"></script>
@@ -149,7 +151,7 @@
     <!-- Custom Js -->
     <script src="assets/js/script.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
 
@@ -165,8 +167,8 @@ setTimeout(function() {
   "closeButton": false,
   "debug": false,
   "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-center",
+  "progressBar": true,
+  // "positionClass": "toast-top-center",
   "preventDuplicates": false,
   "onclick": null,
   "showDuration": "300",
@@ -180,15 +182,15 @@ setTimeout(function() {
 }
 @if(session("danger"))
   toastr.error("{{ session("danger") }}");
-@elseif("status")
+@elseif(session("status"))
     toastr.success("{{ session("status") }}");
-@elseif("success")
+@elseif(session("success"))
     toastr.success("{{ session("success") }}");
-@elseif("info")
+@elseif(session("info"))
  toastr.info("{{ session("info") }}");
-@elseif("error")
+@elseif(session("error"))
 toastr.error("{{ session("error") }}");
-@elseif("warning")
+@elseif(session("warning"))
  toastr.warning("{{ session("warning") }}");
 @endif
 </script>
