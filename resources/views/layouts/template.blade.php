@@ -67,7 +67,7 @@
         <!-- Content -->
         <div class="page-wrapper">
                 <div class="container-fluid">
-             @if (session('status'))
+             {{-- @if (session('status'))
         <div id="erros" class="alert alert-success alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4>Alert!</h4>
@@ -107,7 +107,7 @@
                 <li>{{ $error }}</li>
             @endforeach
             </div>
-@endif
+@endif --}}
 
             
                 @yield('content')
@@ -192,6 +192,13 @@ setTimeout(function() {
 toastr.error("{{ session("error") }}");
 @elseif(session("warning"))
  toastr.warning("{{ session("warning") }}");
+@endif
+@if ($errors->any())
+             @foreach ($errors->all() as $error)
+             toastr.error("{{$error}}");
+
+            @endforeach
+          
 @endif
 </script>
           @yield('extrajs')

@@ -99,8 +99,10 @@
 											<p class="card-text mb-3"><span class="text-primary">Linkedin : </span>{{$ContactDetails->Linkedin}}</p>
 											@endif
 										
-											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_Contact"><i class="fa fa-plus" aria-hidden="true"></i></a>
-											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#edit_Contact"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											<a href="javascript:void(0)" class="btn btn-theme ctm-border-radius text-white btn-sm" data-toggle="modal" data-target="#add_ContactDetails"><i class="fa fa-plus" aria-hidden="true"></i></a>
+											@if (!empty($ContactDetails))
+											<button value="{{ $ContactDetails->id}}" class="btn btn-theme ctm-border-radius text-white btn-sm" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+											@endif
 										</div>
 
 									</div>
@@ -225,70 +227,77 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- Modal body -->
+					{!! Form::open(['method'=> 'post','route' => 'update.basic_Information', 'files' => true ]) !!}
+                     <input id="task_id" type="hidden" name="token">
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Edit Basic Information</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" id="Preferred_name" placeholder="Add Preferred Name" >
+							<input type="text" class="form-control" id="Preferred_name" name="Preferred_name" placeholder="Add Preferred Name" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="First Name"  id="First_name">
+							<input type="text" class="form-control" placeholder="First Name" name="First_name" id="First_name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Last Name" id="Last_name">
+							<input type="text" class="form-control" placeholder="Last Name" name="Last_name" id="Last_name">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Nationality" id="Nationality">
+							<input type="text" class="form-control" placeholder="Add Nationality" name="Nationality" id="Nationality">
 						</div>
 						<div class="input-group mb-3">
-							<input class="form-control datetimepicker date-enter" type="text" placeholder="Add Date of Birth" >
+							<input class="form-control datetimepicker date-enter" type="text" name="" placeholder="Add Date of Birth" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Gender" >
+							<input type="text" class="form-control" name="Gender" placeholder="Add Gender" id="Gender" >
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Blood Group" >
+							<input type="text" class="form-control" name="Blood_group" placeholder="Add Blood Group" id="Blood_group" >
 						</div>
 						<button type="button" class="btn btn-danger float-right ml-3" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
+						<button type="submit" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
 					</div>
+					{!!Form::close()!!}
 				</div>
 			</div>
 		</div>
-		<!-- Edit Contact The Modal -->
-		<div class="modal fade" id="edit_Contact">
+		<!-- Edit Contact Information The Modal -->
+		<div class="modal fade" id="edit_ContactInformation">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- Modal body -->
+					{!! Form::open(['method'=> 'post','route' => 'update.contact_Information', 'files' => true ]) !!}
+                     <input id="task_id" type="hidden" name="token">
 					<div class="modal-body">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title mb-3">Edit Contact</h4>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Phone Number" value="987654321">
+							<input type="text" class="form-control" placeholder="Add Phone Number" name="Phone_number" id="Phone_number">
 						</div>
 						<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="Login Email" value="mariacotton@example.com">
+							<input type="email" class="form-control" placeholder="Login Email" name="Login_email" id="Login_email">
 						</div>
 						<div class="input-group mb-3">
-							<input type="email" class="form-control" placeholder="Add Personal Email" value="maria@example.com">
+							<input type="email" class="form-control" placeholder="Add Personal Email" name="Personal_email" id="Personal_email">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Seconary Phone Number" value="986754231">
+							<input type="text" class="form-control" placeholder="Add Seconary Phone Number" name="Secondary_Phone_number" id="Secondary_Phone_number">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Add Web Site" value="www.focustechnology.com">
+							<input type="text" class="form-control" placeholder="Add Web Site" name="Web_site" id="Web_site">
 						</div>
 						<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Connect Your Linkedin" value="#mariacotton">
+							<input type="text" class="form-control" placeholder="Connect Your Linkedin" name="Linkedin" id="Linkedin">
 						</div>
 						<button type="button" class="btn btn-danger text-white ctm-border-radius float-right ml-3" data-dismiss="modal">Cancel</button>
 						<button type="submit" class="btn btn-theme  button-1 text-white ctm-border-radius float-right">Save</button>
 					</div>
+					{!!Form::close()!!}
+
 				</div>
 			</div>
 		</div>
 		<!-- Add Contact The Modal -->
-		<div class="modal fade" id="add_Contact">
+		<div class="modal fade" id="add_ContactInformation">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<!-- Modal body -->
@@ -391,16 +400,43 @@
 				$.get(base_url + '/' + url + '/' + task_id, function (data) {
 					//success data
 					console.log(data);
-					$('#basic_id').text(data.id);
+					$('#task_id').val(data.id);
 					$('#Preferred_name').val(data.Preferred_name);
 					$('#First_name').val(data.First_name);
 					$('#Last_name').val(data.Last_name);
-					//window.$('#edit_basicInformation').modal();
+					$('#Nationality').val(data.Nationality);
+					$('#Gender').val(data.Gender);
+					$('#Blood_group').val(data.Blood_group);
 				     $("#edit_basicInformation").modal("show");
 				
 				}) 
 			});
 		  });
+		  	
+		  $(document).ready(function(){
+		
+		var url = "get-contactdetails";
+	
+		$('.open-complete').click(function(){
+			var task_id = $(this).val();
+	
+			var base_url = window.location.origin;
+	
+			$.get(base_url + '/' + url + '/' + task_id, function (data) {
+				//success data
+				console.log(data);
+				$('#task_id').val(data.id);
+				$('#Phone_number').val(data.Phone_number);
+				$('#Login_email').val(data.Login_email);
+				$('#Personal_email').val(data.Personal_email);
+				$('#Secondary_Phone_number').val(data.Secondary_Phone_number);
+				$('#Web_site').val(data.Web_site);
+				$('#Linkedin').val(data.Linkedin);
+				 $("#edit_ContactInformation").modal("show");
+			
+			}) 
+		});
+	  });
 		  </script>
 		@endsection
 		@endsection

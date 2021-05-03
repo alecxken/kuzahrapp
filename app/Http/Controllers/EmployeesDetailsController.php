@@ -93,5 +93,59 @@ class EmployeesDetailsController extends Controller
         $data = basicInformation::findorfail($id);
 return $data;
     }
+
+    public function BasicDetails_update (Request $request){
+                     $data = basicInformation::all()->where('id',$request->input('token'))->first();
+                     
+                         if(!empty($data)){ $BasicDetails = basicInformation::findorfail($data->id);}
+                        
+                     else
+                     {
+                         return back()->with('error','Not found');}
+
+                    $BasicDetails->user_id = Auth::user()->id;
+            
+            
+                    $BasicDetails->Preferred_name = $request->input('Preferred_name');
+                    $BasicDetails->First_name = $request->input('First_name');
+                    $BasicDetails->Last_name = $request->input('Last_name');
+                    $BasicDetails->Nationality = $request->input('Nationality');
+                    // $BasicDetails->Date_birth = $request->input('Date_birth');
+                    $BasicDetails->Gender = $request->input('Gender');
+                    $BasicDetails->Blood_group = $request->input('Blood_group');
+                    
+                    
+                    if( $BasicDetails->save()){
+                        return back()->with('status','Success');
+                    }
+                 
+            
+
+    }
+    public function editContact_details($id){
+        $data = ContactInformation::findorfail($id);
+return $data;
+    }
+
+    public function contactDetails_update (Request $request){
+        $data = ContactInformation::all()->where('id',$request->input('token'))->first();
+        if(!empty($data)){ $ContactDetails = ContactInformation::findorfail($data->id);}
+                        
+        else
+        {
+            return back()->with('error','Not found');}
+        $ContactDetails->user_id = Auth::user()->id;
+
+        $ContactDetails->Phone_number = $request->input('Phone_number');
+        $ContactDetails->Login_email = $request->input('Login_email');
+        $ContactDetails->Personal_email = $request->input('Personal_email');
+        $ContactDetails->Secondary_Phone_number = $request->input('Secondary_Phone_number');
+        $ContactDetails->Web_site = $request->input('Web_site');
+        $ContactDetails->Linkedin = $request->input('Linkedin');
+        
+        if($ContactDetails->save()){
+            return back()->with('status','Success');
+        }
+    }
    
 }
